@@ -15,9 +15,6 @@ function HomePage() {
     }, []);
     return (
         <div>
-            <Link to={'/create-event'} >
-                Create Event
-            </Link>
             {
                 events?.map((e) => {
                     return (

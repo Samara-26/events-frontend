@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 function CreateEventPage() {
+    const navigate = useNavigate();
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState("");
@@ -10,8 +14,7 @@ function CreateEventPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(title, description);
-        await fetch("http://localhost:3001/api/events", {
+        const response = await fetch("http://localhost:3001/api/events", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +29,11 @@ function CreateEventPage() {
                 longitude: Number(longitude),
             }),
         });
+        if (response.ok) {
+            navigate("/");
+        }
     };
+
     return (
         <div>
             <h1>CreateEventPage</h1>
