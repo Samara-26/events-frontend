@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 function SignInPage() {
+    const [error, setError] = useState("");
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,7 +19,7 @@ function SignInPage() {
             }),
         });
         if (!response.ok) {
-            console.log("Login Failed");
+            setError("Invalid email or password");
             return;
         }
         const data = await response.json();
@@ -26,6 +27,7 @@ function SignInPage() {
         localStorage.setItem("token", data.token);
         console.log(data.token);
         navigate("/");
+        window.location.reload();
 
     };
 
@@ -47,6 +49,7 @@ function SignInPage() {
                 />
                 <button type='submit'>SignIn</button>
             </form>
+            {error && <p className='text-red-500'>{error}</p>}
         </div>
     )
 }

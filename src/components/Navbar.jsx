@@ -8,9 +8,11 @@ function Navbar() {
         localStorage.removeItem("token");
         navigate("/signin");
         setToken(null);
+        window.location.reload();
     }
     return (
-        <nav>
+        <nav className="bg-slate-900 text-white px-6 py-4 flex gap-6">
+            <h1 className="font-bold text-lg">Evently</h1>
             <Link to="/">Home</Link>
             <Link to='/create-event'>Create Event</Link>
             {!token ? (
